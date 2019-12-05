@@ -1,0 +1,192 @@
+<html ng-app="widgetCreation">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ng-controller="widgetCtrl" class="container-fluid">
+
+<div class="row">
+    <div class="col-4 border-right designer-container pt-3">
+        <h2 class="text-center mb-3">Widget Designer</h2>
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link w-100 text-left" type="button" data-toggle="collapse"
+                                data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            #1 Data Source
+                        </button>
+                    </h2>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                     data-parent="#accordionExample">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="reportName">Report Name</label>
+                                <input type="text" class="form-control" ng-model="widgetName" id="reportName"
+                                       aria-describedby="emailHelp" placeholder="Enter your Report Name">
+                                <small id="reportNameHelp" class="form-text text-muted">Logically name your
+                                    report</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="table">Table</label>
+                                <select ng-model="selectedTableName" id="tableNames" class="form-control">
+                                    <option ng-repeat="tableData in tableDatas" value="{{tableData.system_name}}">{{tableData.name}}</option>
+                                </select>
+                                <small id="tableHelp" class="form-text text-muted">Choose a table for your data.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="apiUrl">API Url</label>
+                                <input ng-model="selectedApiUrl" type="text" class="form-control" id="apiUrl"
+                                       aria-describedby="emailHelp" placeholder="Enter your API Url">
+                                <small id="apiUrl" class="form-text text-muted">API as Source of Data</small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed w-100 text-left" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            #2 Chart Type
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <img class="img-thumbnail chart-type" src="images/pie.png" data-toggle="tooltip"
+                                     title="Pie Chart"/>
+                            </div>
+                            <div class="col-6">
+                                <img class="img-thumbnail chart-type" src="images/funnel.png" data-toggle="tooltip"
+                                     title="Funnel Chart"/>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <img class="img-thumbnail chart-type" src="images/bar.png" data-toggle="tooltip"
+                                     title="Bar Chart"/>
+                            </div>
+                            <div class="col-6">
+                                <img class="img-thumbnail chart-type" src="images/bar-rotated.png" height="95px;"
+                                     data-toggle="tooltip"
+                                     title="Bar Chart (Rotated)"/>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <img class="img-thumbnail chart-type" src="images/line.png" data-toggle="tooltip"
+                                     title="Line Chart"/>
+                            </div>
+                            <div class="col-6">
+                                <img class="img-thumbnail chart-type" src="images/area.png" data-toggle="tooltip"
+                                     title="Area Chart"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed w-100 text-left" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            #3 Data Aggregation
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="table">Grouping</label>
+                                <select id="grouping" class="form-control">
+                                    <option>Status</option>
+                                    <option>Active</option>
+                                </select>
+                                <small id="groupingHelp" class="form-text text-muted">Choose a column to group
+                                    on.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="table">Aggregation Type</label>
+                                <select id="aggregation" class="form-control">
+                                    <option>Sum</option>
+                                    <option>Count</option>
+                                    <option>Average</option>
+                                </select>
+                                <small id="aggregationHelp" class="form-text text-muted">Choose an aggregation
+                                    type..</small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed w-100 text-left" type="button" data-toggle="collapse"
+                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            #4 Theme
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <img class="img-thumbnail chart-type" src="images/theme1.png"/>
+                            </div>
+                            <div class="col-4">
+                                <img class="img-thumbnail chart-type" src="images/theme2.png"/>
+                            </div>
+                            <div class="col-4">
+                                <img class="img-thumbnail chart-type" src="images/theme3.png"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-8 preview-container pt-3">
+        <h2 class="text-center">
+            Widget Preview
+        </h2>
+        <hr/>
+        <div class="clearfix">
+            <div class="float-right">
+                <button class="btn btn-sm btn-outline-info"><i class="fa fa-undo"></i> Refresh</button>
+                <button class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i> Delete Widget</button>
+                <button ng-click="saveWidget()" class="btn btn-sm btn-outline-success"><i class="fa fa-save"></i> Save Widget</button>
+            </div>
+        </div>
+        <div class="card-header mb-3 mt-3">
+            <i class="fa fa-filter"></i> Filter Data
+            <span class="float-right"><a href="#">Show Raw</a></span>
+        </div>
+        <div id="container"></div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+<script src="main.js"></script>
+<script src="chart.js"></script>
+</body>
+</html>
