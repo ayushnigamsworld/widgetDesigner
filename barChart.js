@@ -1,4 +1,4 @@
-var dom = document.getElementById("barcontainer");
+var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
 option = null;
 option = {
