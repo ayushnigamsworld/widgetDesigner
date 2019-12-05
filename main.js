@@ -4,7 +4,19 @@ angularApp.controller("widgetCtrl", function ($scope, DataService, $http) {
   debugger;
   $http.get('https://dashboard.slate-platform.com/api/public/dashing/tables').then(function (dataReceived) {
     $scope.tableDatas = dataReceived.data.data;
+
   });
+
+
+  $scope.selectTableHandler = function () {
+    const selectedTableName = $scope.selectedTableName;
+    $http.post('https://dashboard.slate-platform.com/api/public/dashing/columns', {
+      tableName: selectedTableName
+    }).then(function (responseData) {
+      $scope.groupColumnDatas = responseData.data.data;
+    });
+  };
+
 
   let selectedChart = '';
   let finalApi = null;
@@ -45,21 +57,85 @@ angularApp.controller("widgetCtrl", function ($scope, DataService, $http) {
     if (!chart) {
       echarts.init(dom);
     }
-    const colArr = [];
-    const valArr = [];
+    let colArr = [];
+    let valArr = [];
 
-    const selectedApi = $scope.selectedApiUrl;
-    if (!finalApi) {
-      if ($scope.selectedTableName) {
-        finalApi = `https://dashboard.slate-platform.com/api/workspace/table/${selectedTableId}`;
-      } else {
-        finalApi = selectedApi;
-      }
+
+    if ($scope.selectedTableName) {
+
+      $http.post('https://dashboard.slate-platform.com/api/public/dashing/all', {
+        tableName: $scope.selectedTableName,
+        aggFunction: $scope.aggFunction,
+        aggColumn: $scope.aggColumn,
+        groupColumn: $scope.groupColumn
+      }).then(function (responseData) {
+
+        const chartDatas = responseData.data.data.chartData;
+        colArr = chartDatas[0];
+        valArr = chartDatas[1];
+
+        const dataToFeed = {
+          colArr,
+          valArr,
+          widgetTitle
+        };
+
+        selectedChart = type;
+        if (type == 'pie') {
+          chart.setOption(DataService.pieChart.options(dataToFeed));
+        } else if (type == 'funnel') {
+          chart.setOption(DataService.funnelChart.options(dataToFeed));
+        } else if (type == 'bar') {
+          chart.setOption(DataService.barChart.options(dataToFeed));
+        } else if (type == 'barRotated') {
+          chart.setOption(DataService.barChartRotated.options(dataToFeed));
+        } else if (type == 'line') {
+          chart.setOption(DataService.lineChart.options(dataToFeed));
+        } else if (type == 'area') {
+          chart.setOption(DataService.areaChart.options(dataToFeed));
+        }
+
+      });
+
+
+    } else {
+
+      $http({
+        method: 'GET',
+        url: $scope.selectedApiUrl || 'https://ds01-idp.i3clogic.com/ds/portal/dashboard?q=getDashboardSummaryNew&centerId=28'
+      }).then(function (responseData) {
+        for (let name in response.data.data) {
+          colArr.push(name);
+          valArr.push(response.data.data[name]);
+        }
+
+        const dataToFeed = {
+          colArr,
+          valArr,
+          widgetTitle
+        };
+
+        selectedChart = type;
+        if (type == 'pie') {
+          chart.setOption(DataService.pieChart.options(dataToFeed));
+        } else if (type == 'funnel') {
+          chart.setOption(DataService.funnelChart.options(dataToFeed));
+        } else if (type == 'bar') {
+          chart.setOption(DataService.barChart.options(dataToFeed));
+        } else if (type == 'barRotated') {
+          chart.setOption(DataService.barChartRotated.options(dataToFeed));
+        } else if (type == 'line') {
+          chart.setOption(DataService.lineChart.options(dataToFeed));
+        } else if (type == 'area') {
+          chart.setOption(DataService.areaChart.options(dataToFeed));
+        }
+
+      });
     }
 
 
     const widgetTitle = $scope.widgetName;
-    $http({
+    /*$http({
       method: 'GET',
       url: finalApi || 'https://ds01-idp.i3clogic.com/ds/portal/dashboard?q=getDashboardSummaryNew&centerId=28'
     }).then(function successCallback(response) {
@@ -72,7 +148,7 @@ angularApp.controller("widgetCtrl", function ($scope, DataService, $http) {
         colArr,
         valArr,
         widgetTitle
-      }
+      };
 
       selectedChart = type;
       if (type == 'pie') {
@@ -89,7 +165,7 @@ angularApp.controller("widgetCtrl", function ($scope, DataService, $http) {
         chart.setOption(DataService.areaChart.options(dataToFeed));
       }
 
-    });
+    });*/
 
   }
 

@@ -34,17 +34,59 @@
                                     report</small>
                             </div>
                             <div class="form-group">
-                                <label for="table">Table</label>
-                                <select ng-model="selectedTableName" id="tableNames" class="form-control">
-                                    <option ng-repeat="tableData in tableDatas" value="{{tableData.system_name}}">{{tableData.name}}</option>
-                                </select>
-                                <small id="tableHelp" class="form-text text-muted">Choose a table for your data.</small>
-                            </div>
-                            <div class="form-group">
                                 <label for="apiUrl">API Url</label>
                                 <input ng-model="selectedApiUrl" type="text" class="form-control" id="apiUrl"
                                        aria-describedby="emailHelp" placeholder="Enter your API Url">
                                 <small id="apiUrl" class="form-text text-muted">API as Source of Data</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Table</label>
+                                <select ng-model="selectedTableName" ng-change="selectTableHandler()" id="tableNames" class="form-control">
+                                    <option ng-repeat="tableData in tableDatas" value="{{tableData.system_name}}">{{tableData.name}}</option>
+                                </select>
+                                <small id="tableHelp" class="form-text text-muted">Choose a table for your data.</small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed w-100 text-left" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            #2 Data Aggregation
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="table">Grouping</label>
+                                <select ng-model="groupColumn" id="grouping" class="form-control">
+                                    <option ng-repeat="columnData in groupColumnDatas" value="{{columnData.system_name}}">{{columnData.name}}</option>
+                                </select>
+                                <small id="groupingHelp" class="form-text text-muted">Choose a column to group
+                                    on.</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Aggregation Type</label>
+                                <select ng-model="aggFunction" id="aggregation" class="form-control">
+                                    <option value="sum">Sum</option>
+                                    <option value="count">Count</option>
+                                    <option value="average">Average</option>
+                                </select>
+                                <small id="aggregationHelp" class="form-text text-muted">Choose an aggregation
+                                    type..</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Column for Aggregation</label>
+                                <select ng-model="aggColumn" id="aggregationColumn" class="form-control">
+                                    <option ng-repeat="columnData in groupColumnDatas" value="{{columnData.system_name}}">{{columnData.name}}</option>
+                                </select>
+                                <small id="aggregationColHelp" class="form-text text-muted">Choose an aggregation
+                                    Column..</small>
                             </div>
                         </form>
                     </div>
@@ -55,7 +97,7 @@
                     <h2 class="mb-0">
                         <button class="btn btn-link collapsed w-100 text-left" type="button" data-toggle="collapse"
                                 data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            #2 Chart Type
+                            #3 Chart Type
                         </button>
                     </h2>
                 </div>
@@ -92,41 +134,6 @@
                                      title="Area Chart"/>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed w-100 text-left" type="button" data-toggle="collapse"
-                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            #3 Data Aggregation
-                        </button>
-                    </h2>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="table">Grouping</label>
-                                <select id="grouping" class="form-control">
-                                    <option>Status</option>
-                                    <option>Active</option>
-                                </select>
-                                <small id="groupingHelp" class="form-text text-muted">Choose a column to group
-                                    on.</small>
-                            </div>
-                            <div class="form-group">
-                                <label for="table">Aggregation Type</label>
-                                <select id="aggregation" class="form-control">
-                                    <option>Sum</option>
-                                    <option>Count</option>
-                                    <option>Average</option>
-                                </select>
-                                <small id="aggregationHelp" class="form-text text-muted">Choose an aggregation
-                                    type..</small>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>

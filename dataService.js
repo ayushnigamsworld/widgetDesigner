@@ -142,7 +142,7 @@ angular.module('widgetCreation')
                                legend: {
                                    orient: 'vertical',
                                    left: 'left',
-                                   data: ['Available', 'Active', 'Busy', 'Away', 'Offline']
+                                   data: dataToFeed.colArr || ['Available', 'Active', 'Busy', 'Away', 'Offline']
                                },
                                series: [
                                     {
