@@ -25,27 +25,27 @@ angular.module('widgetCreation')
 	/**
 	 *  Data & Options Generators
 	 */
-	function barChartOptions() {
+	function barChartOptions(dataToFeed) {
 	  return   {
                   xAxis: {
                       type: 'category',
-                      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                      data: dataToFeed.colArr || ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
                   },
                   yAxis: {
                       type: 'value'
                   },
                   series: [{
-                      data: [120, 200, 150, 80, 70, 110, 130],
+                      data: dataToFeed.valArr || [120, 200, 150, 80, 70, 110, 130],
                       type: 'bar'
                   }]
               };
 	}
 
-	function funnelChartOptions() {
+	function funnelChartOptions(dataToFeed) {
 	  return {
                  title: {
-                     text: '???',
-                     subtext: '????'
+                     text: 'Number of Calls',
+                     subtext: 'Number of Calls in a day'
                  },
                  tooltip: {
                      trigger: 'item',
@@ -59,12 +59,12 @@ angular.module('widgetCreation')
                      }
                  },
                  legend: {
-                     data: ['??','??','??','??','??']
+                     data: ['8 am','11 am','2 pm','5 pm','8 pm']
                  },
                  calculable: true,
                  series: [
                      {
-                         name:'???',
+                         name:'21',
                          type:'funnel',
                          left: '10%',
                          top: 60,
@@ -95,43 +95,43 @@ angular.module('widgetCreation')
                          },
                          emphasis: {
                              label: {
-                                 fontSize: 20
+                                 fontSize: 30
                              }
                          },
                          data: [
-                             {value: 60, name: '??'},
-                             {value: 40, name: '??'},
-                             {value: 20, name: '??'},
-                             {value: 80, name: '??'},
-                             {value: 100, name: '??'}
+                             {value: 60, name: 'Accepted Calls'},
+                             {value: 40, name: 'Rejected Calls'},
+                             {value: 20, name: 'Transferred Calls'},
+                             {value: 80, name: 'Abandoned Calls'},
+                             {value: 100, name: 'Total Calls'}
                          ]
                      }
                  ]
              };
 	}
 
-	function areaChartOptions() {
+	function areaChartOptions(dataToFeed) {
     	  return  {
                   xAxis: {
                       type: 'category',
                       boundaryGap: false,
-                      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                      data: dataToFeed.colArr || ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
                   },
                   yAxis: {
                       type: 'value'
                   },
                   series: [{
-                      data: [820, 932, 901, 934, 1290, 1330, 1320],
+                      data: dataToFeed.valArr || [820, 932, 901, 934, 1290, 1330, 1320],
                       type: 'line',
                       areaStyle: {}
                   }]
               };
     	}
 
-    	function pieChartOptions() {
+    	function pieChartOptions(dataToFeed) {
           return  {
                                title: {
-                                   text: 'Agent Status',
+                                   text: dataToFeed.widgetTitle || 'Widget Title',
                                    subtext: 'Status Over Time',
                                    x: 'center'
                                },
@@ -145,12 +145,12 @@ angular.module('widgetCreation')
                                    data: ['Available', 'Active', 'Busy', 'Away', 'Offline']
                                },
                                series: [
-                                   {
+                                    {
                                        name: 'Agent Status',
                                        type: 'pie',
                                        radius: '55%',
                                        center: ['50%', '60%'],
-                                       data: [
+                                       data: dataToFeed.valArr || [
                                            {value: 335, name: 'Available'},
                                            {value: 310, name: 'Active'},
                                            {value: 234, name: 'Busy'},
@@ -169,7 +169,7 @@ angular.module('widgetCreation')
                            };
                  }
 
-     function barChartRotatedOptions() {
+     function barChartRotatedOptions(dataToFeed) {
               return  {
                           dataset: {
                               source: [
@@ -214,17 +214,17 @@ angular.module('widgetCreation')
                       };
             }
 
-            function lineChartOptions() {
+            function lineChartOptions(dataToFeed) {
               return  {
                           xAxis: {
                               type: 'category',
-                              data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                              data: dataToFeed.colArr || ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
                           },
                           yAxis: {
                               type: 'value'
                           },
                           series: [{
-                              data: [820, 932, 901, 934, 1290, 1330, 1320],
+                              data: dataToFeed.valArr || [820, 932, 901, 934, 1290, 1330, 1320],
                               type: 'line'
                           }]
                       };
