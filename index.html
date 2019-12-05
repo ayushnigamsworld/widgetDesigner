@@ -28,23 +28,20 @@
                         <form>
                             <div class="form-group">
                                 <label for="reportName">Report Name</label>
-                                <input type="text" class="form-control" ng-model="widgetName" id="reportName"
-                                       aria-describedby="emailHelp" placeholder="Enter your Report Name">
+                                <input type="text" class="form-control" id="reportName"
+                                       aria-describedby="emailHelp" placeholder="Enter email">
                                 <small id="reportNameHelp" class="form-text text-muted">Logically name your
                                     report</small>
                             </div>
                             <div class="form-group">
                                 <label for="table">Table</label>
-                                <select ng-model="selectedTableName" id="tableNames" class="form-control">
-                                    <option ng-repeat="tableData in tableDatas" value="{{tableData.system_name}}">{{tableData.name}}</option>
+                                <select id="table" class="form-control">
+                                    <option>Agents</option>
+                                    <option>Result Codes</option>
+                                    <option>IVRs</option>
+                                    <option>Contact History Records</option>
                                 </select>
                                 <small id="tableHelp" class="form-text text-muted">Choose a table for your data.</small>
-                            </div>
-                            <div class="form-group">
-                                <label for="apiUrl">API Url</label>
-                                <input ng-model="selectedApiUrl" type="text" class="form-control" id="apiUrl"
-                                       aria-describedby="emailHelp" placeholder="Enter your API Url">
-                                <small id="apiUrl" class="form-text text-muted">API as Source of Data</small>
                             </div>
                         </form>
                     </div>
@@ -62,32 +59,32 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-6" ng-click="onCardClick('pie')">
                                 <img class="img-thumbnail chart-type" src="images/pie.png" data-toggle="tooltip"
                                      title="Pie Chart"/>
                             </div>
-                            <div class="col-6">
+                            <div class="col-6" ng-click="onCardClick('funnel')">
                                 <img class="img-thumbnail chart-type" src="images/funnel.png" data-toggle="tooltip"
                                      title="Funnel Chart"/>
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-6">
+                            <div class="col-6" ng-click="onCardClick('bar')">
                                 <img class="img-thumbnail chart-type" src="images/bar.png" data-toggle="tooltip"
                                      title="Bar Chart"/>
                             </div>
-                            <div class="col-6">
+                            <div class="col-6" ng-click="onCardClick('barRotated')">
                                 <img class="img-thumbnail chart-type" src="images/bar-rotated.png" height="95px;"
                                      data-toggle="tooltip"
                                      title="Bar Chart (Rotated)"/>
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-6">
+                            <div class="col-6" ng-click="onCardClick('line')">
                                 <img class="img-thumbnail chart-type" src="images/line.png" data-toggle="tooltip"
                                      title="Line Chart"/>
                             </div>
-                            <div class="col-6">
+                            <div class="col-6" ng-click="onCardClick('area')">
                                 <img class="img-thumbnail chart-type" src="images/area.png" data-toggle="tooltip"
                                      title="Area Chart"/>
                             </div>
@@ -166,7 +163,7 @@
             <div class="float-right">
                 <button class="btn btn-sm btn-outline-info"><i class="fa fa-undo"></i> Refresh</button>
                 <button class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i> Delete Widget</button>
-                <button ng-click="saveWidget()" class="btn btn-sm btn-outline-success"><i class="fa fa-save"></i> Save Widget</button>
+                <button class="btn btn-sm btn-outline-success"><i class="fa fa-save"></i> Save Widget</button>
             </div>
         </div>
         <div class="card-header mb-3 mt-3">
@@ -174,6 +171,7 @@
             <span class="float-right"><a href="#">Show Raw</a></span>
         </div>
         <div id="container"></div>
+
     </div>
 </div>
 
@@ -187,6 +185,9 @@
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
 <script src="main.js"></script>
-<script src="chart.js"></script>
+
+<script src="3DBarChart.js"></script>
+<script src="dataService.js"></script>
+
 </body>
 </html>
