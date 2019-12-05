@@ -1,28 +1,27 @@
 const angularApp = angular.module("widgetCreation", []);
-angularApp.controller("widgetCtrl", function ($scope, $http) {
-    debugger;
-    const aa = $http.get('https://dashboard.slate-platform.com/api/public/dashing/tables').then(function(dataReceived){
-        $scope.tableDatas = dataReceived.data.data;
-    });
+angularApp.controller("widgetCtrl", function ($scope, DataService, $http) {
 
-    $scope.saveWidget = function() {
-        debugger;
-        const widgetName = $scope.widgetName;
-        const selectedTableId = $scope.selectedTableName;
-        const selectedApi = $scope.selectedApiUrl;
-        const finalApi = '';
-        if (!selectedTableId) {
-            finalApi += `https://dashboard.slate-platform.com/api/workspace/table/${selectedTableId}`;
-        } else {
-            finalApi += selectedApi;
+        $scope.onCardClick = function (type) {
+            var dom = document.getElementById('container');
+            var chart = echarts.getInstanceByDom(dom);
+            if(!chart){
+                echarts.init(dom);
+            }
+            if(type == 'pie'){
+                chart.setOption(DataService.pieChart.options());
+            } else if(type == 'funnel'){
+                chart.setOption(DataService.funnelChart.options());
+            } else if(type == 'bar'){
+             chart.setOption(DataService.barChart.options());
+           } else if(type == 'barRotated'){
+                 chart.setOption(DataService.barChartRotated.options());
+             } else if(type == 'line'){
+               chart.setOption(DataService.lineChart.options());
+           } else if(type == 'area'){
+                 chart.setOption(DataService.areaChart.options());
+             }
         }
-        const dataToPost = {
-            api: finalApi,
-            name: widgetName,
-            chart: '',
-        };
-        console.log(selectedTableId);
-    }
+
 });
 
 
