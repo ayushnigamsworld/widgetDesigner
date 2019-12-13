@@ -7,6 +7,7 @@ angularApp.controller("widgetCtrl", function ($scope, DataService, $http) {
         });
 
         let selectedChart = '';
+        $scope.gridOptions = {};
         $scope.saveWidget = function() {
             debugger;
             const widgetName = $scope.widgetName;
@@ -50,8 +51,13 @@ angularApp.controller("widgetCtrl", function ($scope, DataService, $http) {
              } else if(type == 'line'){
                chart.setOption(DataService.lineChart.options());
            } else if(type == 'area'){
-                 chart.setOption(DataService.areaChart.options());
-             }
+                chart.setOption(DataService.areaChart.options());
+            }else if(type == 'list'){
+                chart.dispose()
+                $scope.listOption = DataService.list.options();
+                var gridDiv = document.querySelector('#container');
+                new agGrid.Grid(gridDiv, $scope.listOption);
+            }
         }
 
 });

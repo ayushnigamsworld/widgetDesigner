@@ -92,6 +92,12 @@
                                      title="Area Chart"/>
                             </div>
                         </div>
+                        <div class="row mt-3">
+                            <div class="col-6" ng-click="onCardClick('list')">
+                                <img class="img-thumbnail chart-type" src="images/list.png" data-toggle="tooltip"
+                                     title="List View"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -173,7 +179,9 @@
             <i class="fa fa-filter"></i> Filter Data
             <span class="float-right"><a href="#">Show Raw</a></span>
         </div>
-        <div id="container"></div>
+        <div id="container">
+        </div>
+        <!--<div ag-grid="gridOptions" class="ag-theme-balham" style="height: 100%;"></div>-->
 
     </div>
 </div>
@@ -187,6 +195,7 @@
 <script src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/21.2.2/ag-grid-community.min.js"></script>
 <script src="main.js"></script>
 <script src="chart.js"></script>
 <script src="areaChart.js"></script>
@@ -194,6 +203,7 @@
 <script src="funnelChart.js"></script>
 <script src="barChartRotated.js"></script>
 <script src="lineChart.js"></script>
+<!--<script src="list.js"></script>-->
 <script src="dataService.js"></script>
 
 </body>
